@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "rootDir": ".",
+    "baseUrl": ".",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "tsup.config.ts",
+    "src/packages/env/_utils/isValidPath.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

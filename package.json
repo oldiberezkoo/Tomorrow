@@ -1,0 +1,43 @@
+{
+  "name": "tomorrow",
+  "version": "0.0.1",
+  "description": "🌐 | オルディ・ベレズコ - Forget the boilerplate.",
+  "main": "dist/index.js",
+  "type": "module",
+  "bin": {
+    "tomorrow": "./dist/index.js"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "env:generate": "tsx src/packages/env/index.ts"
+  },
+  "author": "https://github.com/oldiberezkoo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oldiberezkoo/Tomorrow.git"
+  },
+  "keywords": [
+    "cli",
+    "scaffold",
+    "api",
+    "nodejs",
+    "hono",
+    "typescript",
+    "boilerplate",
+    "template"
+  ],
+  "packageManager": "pnpm@10.8.0",
+  "dependencies": {
+    "@types/node": "^24.0.4",
+    "dotenv": "^16.5.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3"
+  }
+}
