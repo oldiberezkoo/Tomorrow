@@ -28,5 +28,27 @@ async function getPackageInfo(name: string): Promise<any> {
     return null;
   }
 }
+async function searchNpmConfigs(): Promise<PrettierConfig[]> {
+  try {
+    console.debug("🔍 Searching npm registry...");
 
-export { searchPrettierConfigs, getPackageInfo };
+    const response = await fetch(
+      "https://registry.npmjs.org/-/v1/search?text=prettier-config&size=10"
+    );
+    const data = await response.json();
+
+    const configs: PrettierConfig[] = data.objects.map((pkg: any) => ({
+      name: pkg.package.name,
+      source: "npm" as const,
+      version: pkg.package.version,
+      description: pkg.package.description || "No description",
+    }));
+
+    console.debug(`Found ${configs.length} npm configs`);
+    return configs;
+  } catch (error) {
+    console.error("Failed to search npm registry", error);
+    return [];
+  }
+}
+export { searchPrettierConfigs, getPackageInfo, searchNpmConfigs };

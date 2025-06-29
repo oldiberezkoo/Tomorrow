@@ -1,4 +1,6 @@
 import { getPackageManager } from "../_store/index.js";
+import { InstallTransaction } from "../_types/index.js";
+import { readPackageJson, writePackageJson } from "./packageJson.js";
 import { runCommand } from "./packageManager.js";
 
 async function installDeps(packages: string[]): Promise<InstallTransaction> {
@@ -22,7 +24,9 @@ async function installDeps(packages: string[]): Promise<InstallTransaction> {
       },
     };
   } catch (error) {
-    logError("Failed to install dependencies:", error);
+    console.error("Failed to install dependencies:", error);
     throw error;
   }
 }
+
+export { installDeps };

@@ -1,26 +1,43 @@
 import { PrettierConfig } from "../_types/index.js";
 import { fileExists, readFile } from "./filesSystem.js";
-import { addConfig } from "./../_store/index.js";
-
+import { addConfig, store } from "./../_store/index.js";
 async function loadLocalConfigs(): Promise<void> {
   const patterns = [
     ".prettierrc",
     ".prettierrc.json",
     ".prettierrc.js",
-    ".prettierrc.mjs",
-    ".prettierrc.cjs",
-    ".prettierrc.yaml",
-    ".prettierrc.yml",
     "prettier.config.js",
-    "prettier.config.mjs",
-    "prettier.config.cjs",
   ];
+
+  console.debug("🔍 Scanning for local configs...");
 
   for (const pattern of patterns) {
     if (await fileExists(pattern)) {
-      const config = await parseLocalConfig(pattern);
-      if (config) {
-        addConfig(config);
+      try {
+        const content = await readFile(pattern);
+        let parsed: any = {};
+
+        if (pattern.endsWith(".js")) {
+          // Простой парсинг JS файлов
+          const match = content.match(/module\.exports\s*=\s*({[\s\S]*?})/);
+          if (match) {
+            parsed = JSON.parse(match[1].replace(/(\w+):/g, '"$1":'));
+          }
+        } else {
+          parsed = JSON.parse(content);
+        }
+
+        const config: PrettierConfig = {
+          name: `local:${pattern}`,
+          source: "local",
+          path: pattern,
+          content: parsed,
+        };
+
+        store.configs.set(config.name, config);
+        console.debug(`✅ Found local config: ${pattern}`);
+      } catch (error) {
+        console.error(`Failed to parse ${pattern}`, error);
       }
     }
   }

@@ -1,6 +1,6 @@
 export interface PrettierConfig {
   name: string;
-  source: "local" | "npm";
+  source: 'local' | 'npm';
   path?: string;
   version?: string;
   description?: string;
@@ -9,15 +9,16 @@ export interface PrettierConfig {
   plugins?: string[];
 }
 
-export interface CliOptions {
+interface CliOptions {
   scripts?: boolean;
   dryRun?: boolean;
   yes?: boolean;
   debug?: boolean;
+  force?: boolean;
 }
 
 export interface PackageManager {
-  name: "npm" | "yarn" | "pnpm";
+  name: 'npm' | 'yarn' | 'pnpm';
   lockFile: string;
   installCmd: string[];
   addCmd: string[];

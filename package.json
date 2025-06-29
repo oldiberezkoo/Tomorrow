@@ -14,7 +14,8 @@
     "dev": "tsup --watch",
     "server": "tsx ./http.ts",
     "build": "tsup",
-    "env:generate": "tsx src/packages/env/index.ts"
+    "env:generate": "tsx src/packages/env/index.ts",
+	"prettier": "tsx ./src/packages/prettier/index.ts"
   },
   "author": "https://github.com/oldiberezkoo",
   "repository": {

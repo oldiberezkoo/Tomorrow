@@ -1,4 +1,3 @@
-
 import { readFile, writeFile } from "./filesSystem.js";
 
 async function readPackageJson(): Promise<any> {
@@ -37,3 +36,10 @@ async function addPrettierScripts(packageJson: any): Promise<any> {
     },
   };
 }
+
+export {
+  readPackageJson,
+  writePackageJson,
+  updatePackageJson,
+  addPrettierScripts,
+};
