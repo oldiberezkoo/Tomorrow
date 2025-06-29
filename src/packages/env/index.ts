@@ -119,3 +119,4 @@ const inputArg = (() => {
 
 export { inputArg };
 export default generateTemplate(inputArg);
+// TODO: Добавить возможность вызвать как функцию
